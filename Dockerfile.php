@@ -1,10 +1,10 @@
+# syntax=docker/dockerfile:1
 FROM php:7.4-apache
 
-WORKDIR /var/www/html
-
-COPY . .
-
-RUN composer install
+# Install PDO MySQL extension
+RUN docker-php-ext-install pdo_mysql
+ 
+COPY . /var/www/html
 
 EXPOSE 80
 
