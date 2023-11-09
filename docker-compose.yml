@@ -4,7 +4,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: inc/Dockerfile.php
+      dockerfile: /home/ubuntu/inc/Dockerfile.php
     ports:
       - "8080:80"
     depends_on:
