@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 # use the official MySQL image as the base image
 FROM mysql:5.7
 
