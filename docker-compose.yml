@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: inc/Dockerfile.php
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - my-network
+
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - my-network
+
+networks:
+  my-network:
