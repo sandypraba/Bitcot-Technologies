@@ -1,0 +1,10 @@
+# use the official MySQL image as the base image
+FROM mysql:5.7
+
+# Set My SQL root password
+ENV MYSQL_ROOT_PASSWORD=yourRootPassword
+
+#Create a database and user
+ENV MYSQL_DATABASE=cloudPlusPlusLab
+ENV MYSQL_USER=rdsuser123
+ENV MYSQL_PASSWORD=rdspass123
