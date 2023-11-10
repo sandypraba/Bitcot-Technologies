@@ -10,3 +10,4 @@
 
 ![bitcot 11](https://github.com/sandypraba/Bitcot-Technologies/assets/118245606/ed452951-a016-4a83-9a94-1f02ff341899)
 
+![bitcot 12](https://github.com/sandypraba/Bitcot-Technologies/assets/118245606/6ef7155f-5b81-44b7-83a1-2139eb11331f)
