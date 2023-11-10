@@ -1,0 +1,40 @@
+
+pipeline {
+    agent any
+    environment {
+        ECR_REGISTRY = '123456789012.dkr.ecr.us-east-1.amazonaws.com'  //  ECR registry URL
+        IMAGE_NAME = 'php-app-image'
+        INSTANCE_IP =’54.81.128.121’ //  EC2 instance IP or DNS
+    }
+    stages {
+        stage('Build and Push Docker Image') {
+            steps {
+                script {
+                    def appImage = docker.build("${ECR_REGISTRY}/${IMAGE_NAME}")
+                    withCredentials([string(credentialsId: 'aws-ecr-credentials', variable: 'AWS_CREDENTIALS')]) {
+                        appImage.push()
+                    }
+                }
+            }
+        }
+        stage('Deploy with Docker Compose') {
+            steps {
+                script {
+                    docker.withRegistry(ECR_REGISTRY, 'ecr:us-east-1:aws-ecr-credentials') {
+                        sh 'docker-compose up -d'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                sshagent(['ssh-credentials-id']) {
+                    sh "ssh ec2-user@${INSTANCE_IP} 'docker-compose -f /path/to/docker-compose.yml up -d'"
+                }
+            }
+        }
+    }
+}
